@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+     	  <link rel="stylesheet" type="text/css" href="bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.css" >
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js"></script> 
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <script type="text/javascript" src="app.js"></script>
+   <script type="text/javascript" src="angularController.js"></script>
+    <script type="text/javascript">
+    	// var $j = jQuery.noConflict();  
+     // $j('#datepicker').datetimepicker({
+      //    format : "DD-MM-YYYY"      
+       // });
+    </script>
+     </head>
+
+    <body ng-app="Candidate" ng-controller="angularController">
+
+    <nav class="navbar navbar-inverse no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Candidate</a>        
+                </div><!-- navbar-header-->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            </ul>
+                </div><!-- bs-example-navbar-collapse-1 -->
+
+	</nav>
+   
+    <form class="form-horizontal" ng-submit="save(candidateForm.$valid)" name="candidateForm">
+    <div  >
+     <div class="container">
+     <div class="panel panel-default">
+        <div class="panel-heading">Form</div>
+          <div class="panel-body">
+
+          	<div class="form-group">
+          	<label class="control-label col-sm-2 col-md-2 col-lg-2">ID</label>
+          	<div class="col-sm-3 col-md-3 col-lg-3">
+          		<div class="input-group">
+          			<input type="name" name="value" class="form-control" id="id" placeholder="Id" ng-model="value">	
+          		</div> 
+          	</div>
+          	<div class="col-sm-3 col-md-3 col-lg-3">
+                	<input type="button" class="btn btn-info" value="Search Button" ng-click="search()">
+                	</div>
+          	</div>
+
+   		    <div class="form-group">
+            <label class="control-label col-sm-2 col-md-2 col-lg-2">Name</label>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+              <div class="input-group"  ng-class="{ 'has-error' : candidateForm.firstName.$invalid && !candidateForm.firstName.$pristine }">
+                  <input type="name" name="firstName" class="form-control" id="fname" placeholder="First name" ng-model="firstName" required="required">
+                    <p ng-show="candidateForm.firstName.$invalid && !candidateForm.firstName.$pristine" class="help-block">First name is required.</p>
+              </div>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                  <div class="input-group">
+                    <input type="name" class="form-control" id="mname" placeholder="Middle name" ng-model="middleName">
+              </div>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                  <div class="input-group" ng-class="{ 'has-error' : candidateForm.lastName.$invalid && !candidateForm.lastName.$pristine }">
+                    <input type="name" name="lastName" class="form-control" id="lname" placeholder="Last name" ng-model="lastName" required="required">
+                    <p ng-show="candidateForm.lastName.$invalid && !candidateForm.lastName.$pristine" class="help-block">Last name is required.</p>
+              </div>
+              </div>
+            </div>  
+
+            <div class="form-group">
+              <label class="control-label col-sm-6 col-md-8 col-lg-6"> Full name should contains only alphabets</label> 
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label col-sm-2 col-md-2 col-lg-2">Email</label>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="input-group" ng-class="{ 'has-error' : candidateForm.email.$invalid && !candidateForm.email.$pristine}">
+                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" ng-model="email" required="required">
+                <p ng-show="candidateForm.email.$invalid && !candidateForm.email.$pristine" class="help-block">Enter valid email address</p>
+                </div>
+              </div>
+              <label class="control-label col-sm-2 col-md-2 col-lg-2">Gender</label>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="input-group">
+					  <label class="radio-inline"><input type="radio" name="optradio" ng-model="gender" value="male">Male</label>
+						<label class="radio-inline"><input type="radio" name="optradio" ng-model="gender" value="female">Female</label>
+                </div>
+              </div>
+            </div>  
+
+            
+            <div class="form-group">
+              <label class="control-label col-sm-2 col-md-2 col-lg-2">Contact No</label>
+             <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="input-group" ng-class="{ 'has-error' : candidateForm.contactNo.$invalid && !candidateForm.contactNo.$pristine}">
+                 <input type="text" name="contactNo" class="form-control" id="contact_no" placeholder="Enter mobile no" ng-model="contactNo" ng-pattern="/^[7-9][0-9]{9}$/" ng-maxlength="10" required="required">
+                 <p ng-show="candidateForm.contactNo.$invalid && !candidateForm.contactNo.$pristine && candidateForm.contactNo.$error.pattern" class="help-block">Please enter valid number</p>
+                </div>  
+              </div>
+              <label class="control-label col-sm-2 col-md-2 col-lg-2">Alternate Contact No </label>
+              <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="input-group" ng-class="{ 'has-error' : candidateForm.alternateContactNo.pattern}">
+                  <input type="text" name="alternateContactNo" class="form-control" id="phone_no" placeholder="Enter Contact no" ng-model="alternateContactNo" ng-pattern="/^[7-9][0-9]{9}$/" ng-maxlength="10">
+                   <p ng-show="candidateForm.alternateContactNo.$error.pattern" class="help-block">Please enter valid number</p>
+                </div>
+              </div>
+            </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Stability</label>
+                <div class="col-sm-3">
+                <div>
+	                  <select id="menu1" name="stability" ng-model="stability" >
+							<option value="Good">Good</option>
+							<option value="Medium">Medium</option>
+							<option value="Bad">Bad</option>
+							</select>
+				</div>
+				</div> 
+                 <!-- <div class="col-sm-3">
+                     <div class="dropdown">
+                   <button class="btn btn-default dropdown-toggle col-sm-6" type="button" id="menu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="candidate.stability">Select
+                       <span class="caret"></span></button>
+                          <ul class="dropdown-menu" aria-labelledby="menu1">
+                            <li><a class="dropdown-item" href="#">Good</a></li>
+                            <li><a class="dropdown-item" href="#">Medium</a></li>
+                            <li><a class="dropdown-item" href="#">Bad</a></li>
+                            </ul>
+                       </div>
+                  </div> -->
+                  <label class="control-label col-sm-2">Employment Type</label>
+                    <div class="col-sm-3">
+                <div>
+	                  <select id="menu2" name="stability" ng-model="employmentType" >
+							<option value="Full Time">Full Time</option>
+							<option value="Part Time">Part Time</option>
+						</select>
+				</div>
+				</div> 
+                  <!-- <div class="col-sm-3">
+                     <div class="dropdown">
+                   <button class="btn btn-default dropdown-toggle col-sm-6" type="button" id="menu2" data-toggle="dropdown" ng-model="candidate.employmentType">Select
+                       <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Full Time</a></li>
+                            <li><a class="dropdown-item" href="#">Part Time</a></li>
+                          </ul>
+                       </div>
+                  </div> -->
+                </div>
+
+                <div class="row">
+                <div class="form-group">
+                <div class="">
+                	<div class="col-sm-3 col-md-3 col-lg-3">
+                	<input type="submit" class="btn btn-info pull-right" ng-disabled="candidateForm.$invalid" value="Submit Button">
+                	</div>
+                	<div class="col-sm-3 col-md-3 col-lg-3">
+                	<input type="button" class="btn btn-info pull-mid" ng-click="delete()" value="delete button">
+                	</div>
+                </div>
+                </div>
+     </div>
+     </div>
+    </div>
+    </div>
+    </form>
+    </div>  
+    
+    <script type="text/javascript">
+
+ /*$('.dropdown-item').click(function(){
+  $("#menu1").text(this.text)
+});*/
+
+
+
+    var $j = jQuery.noConflict();  
+    	$j('#datepicker').datetimepicker({
+          format : "DD-MM-YYYY"      
+        });
+    </script>
+    </body>
+</html>
